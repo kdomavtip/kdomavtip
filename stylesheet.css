@@ -1,0 +1,42 @@
+body {
+  background-color: #e8dada;
+  font-family: 'Roboto', sans-serif;
+  color: white;
+}
+
+#joke {
+  margin: auto;
+  width: 40%;
+  padding: 10px;
+  padding-top: 80px;
+  padding-bottom: 80px;
+
+  background-color: #7baee0;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: 50% 50%;
+
+  border: 5px solid #2e80d1;
+  border-radius: 60px;
+
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+
+#name {
+  color: #f71935;
+}
+
+h1, h2 {
+  text-decoration: none;
+  text-align: center;
+  font-size: 2.4em;
+}
+
+h1 {
+    font-size: 3.4em;
+}
