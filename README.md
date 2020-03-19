@@ -1,6 +1,6 @@
 # Kdo má vtip?
 
-Kdo má vtip na dnešním stand-upu?
+## Kdo má vtip na dnešním stand-upu?
 
 ---
 
