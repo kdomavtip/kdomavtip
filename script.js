@@ -26,7 +26,7 @@ Date.prototype.getDayOfYear = function() {
 function date() {
     let d = new Date()
     /* For testing purposes */
-    // d.setDate(d.getDate() + 1)
+    d.setDate(d.getDate() + 4)
     return d
 }
 
@@ -78,15 +78,16 @@ function get_dow_text() {
 
 }
 
-function update_bg_if_filip(joker) {
-
-    if (joker != 'Filip') {
-        return
+function update_bg_if_filip_or_dominik(joker) {
+    if (joker == 'Filip') {
+        document.getElementById('joke').style.color = '#ff196e'
+        document.getElementById('joke').style.backgroundImage = "url('filip.jpg')"
+    } else if (joker == 'Dominik') {
+        document.getElementById('joke').style.color = '#fff'
+        document.getElementById('joke').style.backgroundImage = "url('dominik.jpg')"
+        document.getElementById('joke').style.backgroundSize = "50% 55%"
+        document.getElementById('joke').style.backgroundPosition = "90% 60%"
     }
-
-    document.getElementById('joke').style.color = '#ff196e'
-    document.getElementById('joke').style.backgroundImage = "url('filip.jpg')"
-
 }
 
 function get_joke_text() {
@@ -100,7 +101,7 @@ function get_joke_text() {
 
     let joker = names[next_standup.getDayOfYear() % names.length]
 
-    update_bg_if_filip(joker)
+    update_bg_if_filip_or_dominik(joker)
 
     return text + '<b id="name">' + joker + '</b>'
 }
