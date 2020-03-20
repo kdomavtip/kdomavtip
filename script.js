@@ -26,7 +26,7 @@ Date.prototype.getDayOfYear = function() {
 function date() {
     let d = new Date()
     /* For testing purposes */
-    d.setDate(d.getDate() + 4)
+    //d.setDate(d.getDate() + 4)
     return d
 }
 
