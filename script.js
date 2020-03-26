@@ -1,76 +1,42 @@
 // Skript Jaromíra Soukupa
 // Kdo má dnes vtip
 
-let names = ['Dominik', 'Eliška', 'Filip', 'Michal', 'Vláďa', 'Wendigo']
-let days = ['neděle', 'pondělí', 'úterý', 'středa', 'čtvrtek', 'pátek', 'sobota']
+let NAMES = ['Wendigo', 'Dominik', 'Eliška', 'Filip', 'Michal', 'Vláďa']
+let DAYS = ['pondělí', 'úterý', 'středa', 'čtvrtek', 'pátek', 'sobota', 'neděle']
+const EPOCH_START = new Date('2020-03-23T00:00:00');
+const NOW = new Date();
+//const NOW = new Date('2020-03-24T09:00:00'); // for DBG
 
-/* Copied from SO */
-
-Date.prototype.isLeapYear = function() {
-    var year = this.getFullYear();
-    if((year & 3) != 0) return false;
-    return ((year % 100) != 0 || (year % 400) == 0);
-};
-
-Date.prototype.getDayOfYear = function() {
-    var dayCount = [0, 31, 59, 90, 120, 151, 181, 212, 243, 273, 304, 334];
-    var mn = this.getMonth();
-    var dn = this.getDate();
-    var dayOfYear = dayCount[mn] + dn;
-    if(mn > 1 && this.isLeapYear()) dayOfYear++;
-    return dayOfYear;
-};
-
-/* Not copied from SO */
-
-function date() {
-    let d = new Date()
-    /* For testing purposes */
-    //d.setDate(d.getDate() + 4)
-    return d
+function getDaysSinceEpochStart(date) {
+    var today = date ? date : NOW;
+    return Math.floor((today - EPOCH_START)/(1000 * 60 * 60 * 24));
 }
 
-function dom() {
-    return date().getDate() - 1
-}
-
-function dow() {
-    return date().getDay()
-}
-
-function get_offset() {
-
-    if (dow() == 6) {
-        return 2
-    } else if (dow() == 0) {
-        return 1
-    }
-
-    return 0
-}
-
-function offset_date(offset) {
-    let d = date()
-    d.setDate(d.getDate() + offset)
-    return d
+function getWorkDays(days) {
+    // subtract weekends and trailing saturday
+    return days - Math.floor(days/7) * 2 - (days%7 == 6 ? 1 : 0);
 }
 
 function update_jokebearer(text) {
     document.getElementById('jokebearer').innerHTML = text
 }
 
+function update_jokebearer_next(text) {
+    document.getElementById('jokebearer_next').innerHTML = text
+}
+
 function update_dow_text(text) {
     document.getElementById('day_of_week').innerHTML = text
 }
 
-function is_weekend(day_of_week) {
-    return day_of_week == 0 || day_of_week == 6
+function is_weekend(day) {
+    return day % 7 > 4;
 }
 
 function get_dow_text() {
 
-    let day_of_week = dow()
-    let day = days[day_of_week]
+    let day_of_week = getDaysSinceEpochStart() % 7;
+    let day = DAYS[day_of_week];
     let weekend_text = ', příští stand-up bude v pondělí'
     let text = 'Dnes je ' + day + (is_weekend(day_of_week) ? weekend_text : '')
 
@@ -85,32 +51,34 @@ function update_bg_if_filip_or_dominik(joker) {
     } else if (joker == 'Dominik') {
         document.getElementById('joke').style.color = '#fff'
         document.getElementById('joke').style.backgroundImage = "url('dominik.jpg')"
-        document.getElementById('joke').style.backgroundSize = "50% 55%"
-        document.getElementById('joke').style.backgroundPosition = "90% 60%"
     }
 }
 
 function get_joke_text() {
-
-    let next_standup = offset_date(get_offset())
+    let days_since_start = getDaysSinceEpochStart();
+    let work_days = getWorkDays(days_since_start);
 
     let weekend_text = 'Vtip bude mít '
     let weekday_text = 'Vtip má '
 
-    let text = is_weekend(dow()) ? weekend_text : weekday_text
+    let text = is_weekend(days_since_start) ? weekend_text : weekday_text
 
-    let joker = names[next_standup.getDayOfYear() % names.length]
+    let joker = NAMES[work_days % NAMES.length]
 
     update_bg_if_filip_or_dominik(joker)
 
     return text + '<b id="name">' + joker + '</b>'
 }
 
+function get_next_text() {
+    let days_since_start = getDaysSinceEpochStart();
+    let work_days = getWorkDays(days_since_start) + 1;
+    return 'následující má ' + NAMES[work_days % NAMES.length];
+}
 
 function calc() {
-
     update_dow_text(get_dow_text())
     update_jokebearer(get_joke_text())
-
+    update_jokebearer_next(get_next_text())
 }
 
