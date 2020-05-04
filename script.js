@@ -5,7 +5,7 @@ let NAMES = ['Wendigo', 'Dominik', 'Eliška', 'Filip', 'Michal', 'Vláďa']
 let DAYS = ['pondělí', 'úterý', 'středa', 'čtvrtek', 'pátek', 'sobota', 'neděle']
 const EPOCH_START = new Date('2020-03-23T00:00:00');
 const NOW = new Date();
-//const NOW = new Date('2020-03-24T09:00:00'); // for DBG
+// const NOW = new Date('2020-05-06T09:00:00'); // for DBG
 
 function getDaysSinceEpochStart(date) {
     var today = date ? date : NOW;
@@ -51,6 +51,9 @@ function update_bg_if_filip_or_dominik(joker) {
     } else if (joker == 'Dominik') {
         document.getElementById('joke').style.color = '#fff'
         document.getElementById('joke').style.backgroundImage = "url('dominik.jpg')"
+    } else if (joker == 'Eliška') {
+        document.getElementById('joke').style.backgroundImage = "url('eliska.jpg')"
+        document.getElementById('joke').style.backgroundPosition = 'center'
     }
 }
 
