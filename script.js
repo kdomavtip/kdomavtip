@@ -64,13 +64,18 @@ function get_joke_text() {
     let weekend_text = 'Vtip bude mít '
     let weekday_text = 'Vtip má '
 
-    let text = is_weekend(days_since_start) ? weekend_text : weekday_text
-
     let joker = NAMES[work_days % NAMES.length]
+    
+    let text = ''
+    if (joker == 'Eliška') {
+        text = '<b id="name">Eliška</b> má dovolenou'
+    } else {
+        text = (is_weekend(days_since_start) ? weekend_text : weekday_text) + '<b id="name">' + joker + '</b>'
+    }
 
     update_bg_if_filip_or_dominik(joker)
 
-    return text + '<b id="name">' + joker + '</b>'
+    return text 
 }
 
 function get_next_text() {
