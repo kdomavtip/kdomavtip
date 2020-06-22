@@ -1,9 +1,9 @@
 // Skript Jaromíra Soukupa
 // Kdo má dnes vtip
 
-let NAMES = ['Vláďa', 'Wendigo', 'Dominik', 'Eliška', 'Filip', 'Michal']
+let NAMES = ['Wendigo', 'Dominik', 'Eliška', 'Filip', 'Michal', 'Vláďa']
 let DAYS = ['pondělí', 'úterý', 'středa', 'čtvrtek', 'pátek', 'sobota', 'neděle']
-const EPOCH_START = new Date('2020-06-16T00:00:00');
+const EPOCH_START = new Date('2020-06-15T00:00:00');
 const NOW = new Date();
 // const NOW = new Date('2020-05-27T09:00:00'); // for DBG
 
