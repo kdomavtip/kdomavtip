@@ -1,9 +1,9 @@
 // Skript Jaromíra Soukupa
 // Kdo má dnes vtip
 
-let NAMES = ['Filip', 'Michal', 'Vláďa', 'Wendigo', 'Dominik', 'Eliška',]
+let NAMES = ['Martin', 'Michal', 'Vláďa', 'Wendigo', 'Dominik', 'Eliška', 'Filip', ]
 let DAYS = ['pondělí', 'úterý', 'středa', 'čtvrtek', 'pátek', 'sobota', 'neděle']
-const EPOCH_START = new Date('2020-06-22T00:00:00');
+const EPOCH_START = new Date('2020-10-09T00:00:00');
 const NOW = new Date();
 // const NOW = new Date('2020-05-27T09:00:00'); // for DBG
 
@@ -76,7 +76,7 @@ function get_joke_text() {
 function get_next_text() {
     let days_since_start = getDaysSinceEpochStart();
     let work_days = getWorkDays(days_since_start) + 1;
-    return 'následující má ' + NAMES[work_days % NAMES.length];
+    return 'Na příštím standupu má vtip ' + NAMES[work_days % NAMES.length];
 }
 
 function calc() {
